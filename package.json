@@ -1,0 +1,21 @@
+{
+  "name": "hornet v2",
+  "version": "0.0.0",
+  "description": "Gamelauncer from the Arma 3 community echo 12 for the game ArmA 3 from Bohemia Interactive",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/narf101010/hornet2",
+  "keywords": [
+    "Electron",
+    "echo12",
+    "arma 3",
+    "launcher"
+  ],
+  "author": "Florian Klöpf",
+  "license": "MIT License",
+  "devDependencies": {
+    "electron": "~1.6.11"
+  }
+}
