@@ -1,0 +1,31 @@
+/*
+Because the current version of angular material does not provide a simple table; only the over engineered data table,
+I defined my own css rules for tables.
+
+May check https://material.angular.io/components/table/overview if there is a better solution now
+*/
+
+table, th, td {
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+thead, tr{
+  border-bottom: 1px solid #d0d0d0;
+}
+
+td, th {
+  padding: 15px 10px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+td > button {
+  margin-left: 15px !important;
+}

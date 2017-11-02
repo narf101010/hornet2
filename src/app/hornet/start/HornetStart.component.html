@@ -1,3 +1,31 @@
-<div style="background-color: blueviolet">
-  Start
-</div>
+<mat-card *ngFor="let serverList of serverLists">
+  <mat-card-title>{{ serverList.name }}</mat-card-title>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Host</th>
+      <th>Start</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let serverInstance of serverList.instances">
+      <td>{{ serverInstance.name }}</td>
+      <td>{{ serverInstance.host }}:{{ serverInstance.port }}</td>
+      <td>
+        <button mat-raised-button
+                color="primary"
+                class="menu-button">
+          <mat-icon>play_arrow</mat-icon>
+          x64
+        </button>
+        <button mat-raised-button
+                class="menu-button">
+          <mat-icon>play_arrow</mat-icon>
+          x32
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</mat-card>

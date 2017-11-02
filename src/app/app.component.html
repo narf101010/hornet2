@@ -8,9 +8,17 @@
 
     <mat-list>
       <h3 mat-subheader>Hornet</h3>
-      <button mat-button (click)="selectedMenu = MenuItem.HORNET_START">Start
+      <button mat-button
+              class="menu-button"
+              (click)="selectedMenu = MenuItem.HORNET_START">
+        <mat-icon>play_arrow</mat-icon>
+        Start
       </button>
-      <button mat-button (click)="selectedMenu = MenuItem.HORNET_CONFIG">Config
+      <button mat-button
+              class="menu-button"
+              (click)="selectedMenu = MenuItem.HORNET_CONFIG">
+        <mat-icon>settings</mat-icon>
+        Config
       </button>
 
       <mat-divider></mat-divider>
