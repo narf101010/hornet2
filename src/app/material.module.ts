@@ -1,6 +1,6 @@
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule,
-  MatSidenavModule,
+  MatSidenavModule, MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,8 @@ const components = [
   MatSidenavModule,
   MatInputModule,
   MatCardModule,
+  MatToolbarModule,
+  MatTooltipModule,
 ];
 
 @NgModule({

@@ -2,29 +2,32 @@
   <mat-sidenav mode="side"
                opened="true"
                class="menu">
-    <div>
+    <mat-toolbar>
       <img src="../assets/logo-echo.png" alt="Echo 12">
-    </div>
 
-    <mat-list>
-      <h3 mat-subheader>Hornet</h3>
-      <button mat-button
-              class="menu-button"
-              (click)="selectedMenu = MenuItem.HORNET_START">
-        <mat-icon>play_arrow</mat-icon>
-        Start
-      </button>
-      <button mat-button
-              class="menu-button"
-              (click)="selectedMenu = MenuItem.HORNET_CONFIG">
-        <mat-icon>settings</mat-icon>
-        Config
-      </button>
+      <mat-toolbar-row class="menu-item">
+        <strong>Hornet</strong>
+      </mat-toolbar-row>
 
-      <mat-divider></mat-divider>
+      <mat-toolbar-row class="menu-sub-item">
+        <button mat-button
+                class="menu-button"
+                (click)="selectedMenu = MenuItem.HORNET_START">
+          <mat-icon>play_arrow</mat-icon>
+          Start
+        </button>
+      </mat-toolbar-row>
 
-      <h3 mat-subheader>Mantis</h3>
-    </mat-list>
+      <mat-toolbar-row class="menu-sub-item">
+        <button mat-button
+                class="menu-button"
+                (click)="selectedMenu = MenuItem.HORNET_CONFIG">
+          <mat-icon>settings</mat-icon>
+          Config
+        </button>
+      </mat-toolbar-row>
+
+    </mat-toolbar>
   </mat-sidenav>
 
 

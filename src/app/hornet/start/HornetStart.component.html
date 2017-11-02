@@ -1,31 +1,51 @@
 <mat-card *ngFor="let serverList of serverLists">
-  <mat-card-title>{{ serverList.name }}</mat-card-title>
-  <table>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Host</th>
-      <th>Start</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let serverInstance of serverList.instances">
-      <td>{{ serverInstance.name }}</td>
-      <td>{{ serverInstance.host }}:{{ serverInstance.port }}</td>
-      <td>
-        <button mat-raised-button
-                color="primary"
-                class="menu-button">
-          <mat-icon>play_arrow</mat-icon>
-          x64
-        </button>
-        <button mat-raised-button
-                class="menu-button">
-          <mat-icon>play_arrow</mat-icon>
-          x32
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <mat-card-title>
+    {{ serverList.name }}
+  </mat-card-title>
+
+  <mat-card-content>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Host</th>
+        <th>Start</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let serverInstance of serverList.instances">
+        <td>{{ serverInstance.name }}</td>
+        <td>{{ serverInstance.host }}:{{ serverInstance.port }}</td>
+        <td>
+          <button mat-raised-button
+                  color="primary"
+                  class="menu-button"
+                  (click)="launch(serverInstance, true)">
+            <mat-icon>play_arrow</mat-icon>
+            x64
+          </button>
+          <button mat-raised-button
+                  class="menu-button"
+                  (click)="launch(serverInstance, false)">
+            <mat-icon>play_arrow</mat-icon>
+            x32
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <small>Zuletzt Aktualisiert: {{lastUpdate}}</small>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button
+            color="primary"
+            class="menu-button"
+            (click)="getServerLists(true)"
+            matTooltip="Nur weil du öfters klickst wird es nicht schneller... Lass dir mindestens 15 Sekunden Zeit nach dem aktualisieren">
+      <mat-icon>autorenew</mat-icon>
+      Aktualisieren
+    </button>
+  </mat-card-actions>
+
 </mat-card>

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { HornetStartComponent } from './hornet/start/HornetStart.component';
 import { HornetConfigComponent } from './hornet/config/HornetConfig.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { HornetConfigComponent } from './hornet/config/HornetConfig.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MaterialModule,
   ],
   exports: [
