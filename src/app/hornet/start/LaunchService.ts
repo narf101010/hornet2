@@ -26,6 +26,8 @@ export class LaunchService {
           command    = `${path} ${connection} ${mods} ${parameters}`;
 
 
-    this.electronService.process.emit('message', 'launch', command);
+    if (this.electronService.isElectronApp === true) {
+      this.electronService.process.emit('message', 'launch', command);
+    }
   }
 }
