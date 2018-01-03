@@ -1,33 +1,38 @@
 <mat-card>
   <mat-card-title>Hornet Konfiguration</mat-card-title>
-
   <form ngForm="configForm"
-        class="config">
+        class="config"
+        name="hornetConfig">
     <mat-form-field>
       <input matInput
-             #profile
              name="profile"
-             placeholder=" Profil">
+             type="text"
+             [(ngModel)]="config.profile"
+             placeholder="Profil">
     </mat-form-field>
-
+    <br/>
     <mat-form-field>
       <input matInput
-             #path
+             name="path"
+             type="text"
+             [(ngModel)]="config.path"
              placeholder="Pfad zum Arma-Ordner">
       <mat-hint align="start">z.B. <strong>A:\ArmA\steamapps\common\Arma 3</strong></mat-hint>
     </mat-form-field>
-
+    <br/>
     <mat-form-field>
       <input matInput
-             #parameters
+             name="parameters"
+             type="text"
+             [(ngModel)]="config.parameters"
              placeholder="Startparameter">
       <mat-hint align="start">z.B. <strong>-nosplash -world=empty -skipIntro</strong></mat-hint>
     </mat-form-field>
   </form>
-
+  <br/>
   <button mat-raised-button
           color="primary"
-          (click)="onSubmit()">
+          (click)="onSubmit(config)">
     <mat-icon>save</mat-icon>
     Speichern
   </button>

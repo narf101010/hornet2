@@ -1,11 +1,16 @@
+import { NgxElectronModule } from 'ngx-electron';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { HornetStartComponent } from './hornet/start/HornetStart.component';
 import { HornetConfigComponent } from './hornet/config/HornetConfig.component';
-import { HttpClientModule } from '@angular/common/http';
+import { LaunchService } from './hornet/start/LaunchService';
+import { ConfigService } from './hornet/config/ConfigService';
 
 @NgModule({
   declarations: [
@@ -13,17 +18,23 @@ import { HttpClientModule } from '@angular/common/http';
     HornetStartComponent,
     HornetConfigComponent,
   ],
-  imports: [
+  imports:      [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxElectronModule,
     HttpClientModule,
     MaterialModule,
   ],
-  exports: [
+  exports:      [
     BrowserModule,
     MaterialModule,
   ],
-  providers: [],
-  bootstrap: [
+  providers:    [
+    ConfigService,
+    LaunchService,
+  ],
+  bootstrap:    [
     AppComponent,
   ],
 })
