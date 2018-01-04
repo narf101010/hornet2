@@ -4,7 +4,6 @@ Hornet:
 Wichtig:
 - Config in File schreiben/lesen
 - Zu einer .exe packen
-- icons fixen
 - dokumentation
 
 Nice-to-have:

@@ -13,7 +13,11 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 600});
+  mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 600,
+    icon: `${__dirname}/assets/logo-e12.png`,
+  });
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
