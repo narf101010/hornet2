@@ -1,4 +1,4 @@
-<mat-card *ngFor="let serverList of serverLists">
+<mat-card *ngFor="let serverList of serverLists; let listIndex=index">
   <mat-card-title>
     {{ serverList.name }}
   </mat-card-title>
@@ -13,20 +13,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let serverInstance of serverList.instances">
+      <tr *ngFor="let serverInstance of serverList.instances; let instanceIndex=index">
         <td>{{ serverInstance.name }}</td>
         <td>{{ serverInstance.host }}:{{ serverInstance.port }}</td>
         <td>
           <button mat-raised-button
                   color="primary"
                   class="menu-button"
-                  (click)="launch(serverInstance, true)">
+                  (click)="launch(listIndex, instanceIndex, true)">
             <mat-icon>play_arrow</mat-icon>
             x64
           </button>
           <button mat-raised-button
                   class="menu-button"
-                  (click)="launch(serverInstance, false)">
+                  (click)="launch(listIndex, instanceIndex, false)">
             <mat-icon>play_arrow</mat-icon>
             x32
           </button>

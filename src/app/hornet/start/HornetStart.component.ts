@@ -18,20 +18,32 @@ export class HornetStartComponent {
     this.serverLists = [];
     this.lastUpdate  = new Date(0);
 
-    this.getServerLists(false);
+    this.getServerLists();
   }
 
-  public getServerLists(isButtonLoading: boolean): void {
-    this.http.get<Array<IServerList>>('http://stinger.echo12.de/overlay')
-        .subscribe((data) => {
-          console.log(data);
-          this.serverLists = data;
-          this.lastUpdate  = new Date();
-        });
+  public getServerLists(): Promise<Object> {
+    return this.http.get<Array<IServerList>>('http://stinger.echo12.de/overlay').toPromise()
+               .then((data) => {
+                 console.log(data);
+                 this.serverLists = data;
+                 this.lastUpdate  = new Date();
+                 return data;
+               });
   }
 
-  public launch(serverInstance: IServerInstance, is64Bit: boolean): void {
+  public async launch(listIndex: number, instanceIndex: number, is64Bit: boolean): Promise<void> {
+    console.log('### launch', listIndex, instanceIndex, is64Bit);
+    await this.getServerLists();
+
+    if (this.serverLists === undefined
+        || this.serverLists[listIndex] === undefined
+        || this.serverLists[listIndex].instances === undefined
+        || this.serverLists[listIndex].instances[instanceIndex] === undefined) {
+      console.log(this.serverLists);
+      return;
+    }
+
+    const serverInstance = this.serverLists[listIndex].instances[instanceIndex];
     this.launchService.launch(serverInstance, is64Bit);
-
   }
 }
