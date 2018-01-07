@@ -1,0 +1,10 @@
+{
+  "productName": "hornet2",
+  "win": {
+    "target": "portable",
+    "icon": "assets\\icon.ico"
+  },
+  "directories": {
+    "output": "..\\dist"
+  }
+}
