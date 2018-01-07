@@ -1,16 +1,15 @@
 {
   "name": "hornet2",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "UNLICENCED",
+  "main": "main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build-electron": "ng build --base-href . && copy src\\electron\\* dist\\",
-    "electron": "npm run build-electron && .\\node_modules\\.bin\\electron dist"
+    "build": "webpack",
+    "build-electron": "npm run build && copy src\\electron\\* dist\\",
+    "electron": "npm run build-electron && .\\node_modules\\.bin\\electron dist\\main.js",
+    "copy-files": "copy package.json dist\\ && copy icon.ico dist\\",
+    "pack": "electron-packager . --overwrite --platform=win32 --icon=icon.ico --prune=true --asar=true",
+    "deploy": "npm run build-electron && npm run copy-files && cd dist && npm install && npm run pack && cd .. "
   },
   "private": true,
   "dependencies": {
@@ -28,6 +27,7 @@
     "child_process": "^1.0.2",
     "core-js": "^2.5.3",
     "ngx-electron": "^1.0.4",
+    "ngx-fs": "0.0.1",
     "rxjs": "^5.5.6",
     "sudo-prompt": "^8.0.0",
     "zone.js": "^0.8.19"
@@ -41,6 +41,7 @@
     "@types/node": "8.5.2",
     "codelyzer": "~3.2.0",
     "electron": "^1.7.9",
+    "electron-packager": "^10.1.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
@@ -51,6 +52,27 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.5.3"
+    "typescript": "~2.5.3",
+    "webpack-dev-server": "~2.9.3",
+    "webpack": "~3.10.0",
+    "autoprefixer": "^6.5.3",
+    "css-loader": "^0.28.1",
+    "cssnano": "^3.10.0",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.29.0",
+    "less-loader": "^4.0.5",
+    "postcss-loader": "^2.0.8",
+    "postcss-url": "^7.1.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.2.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "style-loader": "^0.13.1",
+    "stylus-loader": "^3.0.1",
+    "url-loader": "^0.6.2",
+    "circular-dependency-plugin": "^4.2.1",
+    "copy-webpack-plugin": "^4.1.1",
+    "uglifyjs-webpack-plugin": "^1.1.5"
   }
 }

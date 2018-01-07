@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/hornet2-win32-x64
 /tmp
 /out-tsc
 

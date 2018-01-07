@@ -16,7 +16,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 600,
-    icon: `${__dirname}/assets/logo-e12.png`,
+    icon: `${__dirname}/icon.ico`,
   });
 
   // and load the index.html of the app.
@@ -30,7 +30,7 @@ function createWindow() {
   mainWindow.setMenu(null);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -65,10 +65,3 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-const sudo = require('sudo-prompt');
-process.addListener('message', function (message, command) {
-  console.log(message, command);
-  sudo.exec(command, {}, function () {
-  });
-});
