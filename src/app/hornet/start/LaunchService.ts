@@ -3,6 +3,7 @@ import * as prompt from 'sudo-prompt';
 
 import { IServerInstance } from './IServerInstance';
 import { ConfigService } from '../config/ConfigService';
+import { IHornetConfig } from '../config/IHornetConfig';
 
 @Injectable()
 export class LaunchService {
@@ -18,7 +19,7 @@ export class LaunchService {
   }
 
   public launch(serverInstance: IServerInstance, is64Bit: boolean): void {
-    const config = this.configService.get();
+    const config = this.getConfig();
 
     if (config.path === undefined || config.profile === undefined) {
       console.log('invalid config', config);
@@ -35,5 +36,11 @@ export class LaunchService {
 
 
     prompt.exec(command, { name: LaunchService.getName(is64Bit) }, console.log);
+  }
+
+  private getConfig(): IHornetConfig {
+    const config      = this.configService.get();
+    config.parameters = config.parameters.replace('|', '');
+    return config;
   }
 }
