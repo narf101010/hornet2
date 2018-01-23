@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { ConfigService } from './ConfigService';
 import { IHornetConfig } from './IHornetConfig';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector:    'app-hornet-config',
@@ -9,7 +10,9 @@ import { IHornetConfig } from './IHornetConfig';
 export class HornetConfigComponent {
   public config: IHornetConfig;
 
-  public constructor(private configService: ConfigService) {
+  public constructor(private configService: ConfigService,
+                     public snackBar: MatSnackBar,
+                     public viewContainerRef: ViewContainerRef) {
     this.config = this.configService.get();
   }
 
@@ -18,5 +21,12 @@ export class HornetConfigComponent {
 
     console.log('submit', this.config);
     this.configService.set(this.config);
+
+    const snackConfig: MatSnackBarConfig = {
+      viewContainerRef: this.viewContainerRef,
+      duration:         750,
+      panelClass:       'echo-snack-bar',
+    };
+    this.snackBar.open('Speichern erfolgreich', undefined, snackConfig);
   }
 }

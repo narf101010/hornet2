@@ -31,3 +31,7 @@ mat-sidenav-content {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.echo-snack-bar {
+  background-color: #7ba628 !important;
+}
