@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { IServerList } from './IServerList';
-import { IServerInstance } from './IServerInstance';
 import { LaunchService } from './LaunchService';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector:    'app-hornet-start',
@@ -14,7 +14,9 @@ export class HornetStartComponent {
   public lastUpdate: Date;
 
   public constructor(private http: HttpClient,
-                     private launchService: LaunchService) {
+                     private launchService: LaunchService,
+                     public snackBar: MatSnackBar,
+                     public viewContainerRef: ViewContainerRef) {
     this.serverLists = [];
     this.lastUpdate  = new Date(0);
 
@@ -24,9 +26,26 @@ export class HornetStartComponent {
   public getServerLists(): Promise<Object> {
     return this.http.get<Array<IServerList>>('http://stinger.echo12.de/overlay').toPromise()
                .then((data) => {
-                 console.log(data);
+                 console.log('load serverList', data);
+
+                 data.forEach((serverList: IServerList) => {
+                   if (serverList.name === 'Internal Instances of Echo12') {
+                     serverList.name = 'Echo12 Server';
+                   } else if (serverList.name === 'External Instances of Echo12') {
+                     serverList.name = 'Externe Server';
+                   }
+                 });
+
                  this.serverLists = data;
                  this.lastUpdate  = new Date();
+
+                 const snackConfig: MatSnackBarConfig = {
+                   viewContainerRef: this.viewContainerRef,
+                   duration:         750,
+                   panelClass:       'echo-snack-bar',
+                 };
+                 this.snackBar.open('Aktualisieren erfolgreich', undefined, snackConfig);
+
                  return data;
                });
   }
