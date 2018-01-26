@@ -27,6 +27,15 @@
         </button>
       </mat-toolbar-row>
 
+      <mat-toolbar-row class="menu-last-item">
+        <button mat-button
+                class="menu-button"
+                (click)="selectedMenu = MenuItem.SETTINGS">
+          <mat-icon></mat-icon>
+          Version {{version}}
+        </button>
+      </mat-toolbar-row>
+
     </mat-toolbar>
   </mat-sidenav>
 
@@ -34,6 +43,7 @@
   <div class="content" [ngSwitch]="selectedMenu">
     <app-hornet-start *ngSwitchCase="MenuItem.HORNET_START"></app-hornet-start>
     <app-hornet-config *ngSwitchCase="MenuItem.HORNET_CONFIG"></app-hornet-config>
+    <app-general-settings *ngSwitchCase="MenuItem.SETTINGS"></app-general-settings>
   </div>
 
 

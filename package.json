@@ -1,22 +1,21 @@
 {
   "name": "hornet2",
   "version": "1.0.4",
-  "license": "UNLICENCED",
+  "license": "MIT License",
   "main": "main.js",
   "author": "E12 Narf",
   "description": "A simple launcher for ArmA 3 for the Echo12 team",
   "scripts": {
-    "build": "webpack",
-    "build-electron": "npm run build && copy src\\electron\\* build\\",
-    "electron": "npm run build-electron && .\\node_modules\\.bin\\electron build\\main.js",
-    "copy-files": "copy package.json build\\ && copy build.json build\\",
+    "build": "gulp build",
+    "electron": "npm run build && .\\node_modules\\.bin\\electron build\\",
     "pack": "electron-builder --config .\\build.json",
-    "deploy": "npm run build-electron && npm run copy-files && cd build && npm run pack"
+    "deploy": "npm run build && cd build && npm run pack"
   },
   "private": true,
   "dependencies": {
     "child_process": "^1.0.2",
     "core-js": "^2.5.3",
+    "gulp-print": "^2.0.1",
     "sudo-prompt": "^8.0.0"
   },
   "devDependencies": {
@@ -48,6 +47,7 @@
     "electron-packager": "^10.1.1",
     "exports-loader": "^0.6.3",
     "file-loader": "^1.1.5",
+    "gulp": "^4.0.0",
     "html-webpack-plugin": "^2.29.0",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "~2.6.2",
@@ -76,6 +76,7 @@
     "url-loader": "^0.6.2",
     "webpack": "~3.10.0",
     "webpack-dev-server": "~2.9.3",
+    "webpack-stream": "^4.0.0",
     "zone.js": "^0.8.19"
   }
 }
