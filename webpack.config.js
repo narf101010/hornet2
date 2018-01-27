@@ -111,7 +111,8 @@ module.exports = {
     ],
     "styles": [
       "./src\\styles.css",
-      "./src\\materialTable.css"
+      "./src\\materialTable.css",
+      "./src\\echo-theme.css",
     ]
   },
   "output": {
@@ -145,7 +146,8 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.css$/,
         "use": [
@@ -170,7 +172,8 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -203,7 +206,8 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.less$/,
         "use": [
@@ -234,7 +238,8 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.styl$/,
         "use": [
@@ -266,7 +271,8 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.css$/,
         "use": [
@@ -291,7 +297,8 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -324,7 +331,8 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.less$/,
         "use": [
@@ -355,7 +363,8 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src\\styles.css"),
-          path.join(process.cwd(), "src\\materialTable.css")
+          path.join(process.cwd(), "src\\materialTable.css"),
+          path.join(process.cwd(), "./src\\\\echo-theme.css"),
         ],
         "test": /\.styl$/,
         "use": [

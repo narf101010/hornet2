@@ -1,0 +1,92 @@
+.mat-button.mat-primary, .mat-icon-button.mat-primary {
+  color: #7ba628 !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #7ba628 !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: #7ba628 !important;
+}
+
+.mat-button.mat-primary .mat-button-focus-overlay, .mat-icon-button.mat-primary .mat-button-focus-overlay {
+  background-color: rgba(123, 166, 40, .12) !important;
+}
+
+.mat-button.mat-primary, .mat-icon-button.mat-primary {
+  color: #7ba628 !important;
+}
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+  background-color: #7ba628 !important;
+}
+
+.mat-button.mat-primary .mat-ripple-element {
+  background-color: rgba(123, 166, 40, .1) !important;
+}
+
+.mat-icon-button.mat-primary .mat-ripple-element {
+  background-color: rgba(123, 166, 40, .2) !important;
+}
+
+.mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+  background-color: #7ba628 !important;
+}
+
+.mat-checkbox:not(.mat-checkbox-disabled).mat-primary .mat-checkbox-ripple .mat-ripple-element {
+  background-color: rgba(123, 166, 40, .26) !important;
+}
+
+.mat-chip.mat-chip-selected.mat-primary {
+  background-color: #7ba628 !important;
+}
+
+.mat-icon.mat-primary {
+  color: #7ba628 !important;
+}
+
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #7ba628 !important;
+}
+
+.mat-radio-button.mat-primary .mat-radio-inner-circle {
+  background-color: #7ba628 !important;
+}
+
+.mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element {
+  background-color: rgba(123, 166, 40, .26) !important;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: #7ba628 !important;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #7ba628 !important;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: rgba(123, 166, 40, .5) !important;
+}
+
+.mat-slide-toggle.mat-primary .mat-ripple-element {
+  background-color: rgba(123, 166, 40, .12) !important;
+}
+
+.mat-primary .mat-slider-thumb, .mat-primary .mat-slider-thumb-label, .mat-primary .mat-slider-track-fill {
+  background-color: #7ba628 !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #7ba628 !important;
+}
+
+.mat-tab-group.mat-background-primary .mat-tab-header, .mat-tab-group.mat-background-primary .mat-tab-links, .mat-tab-nav-bar.mat-background-primary .mat-tab-header, .mat-tab-nav-bar.mat-background-primary .mat-tab-links {
+  background-color: #7ba628
+}
+
+.mat-toolbar.mat-primary {
+  background: #7ba628 !important;
+}
+
