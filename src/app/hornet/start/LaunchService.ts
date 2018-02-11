@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as prompt from 'sudo-prompt';
+import * as isAdmin from 'is-admin';
+import { exec } from 'child_process';
 
 import { IServerInstance } from './IServerInstance';
 import { ConfigService } from '../config/ConfigService';
@@ -34,6 +36,18 @@ export class LaunchService {
           parameters = `-name=${config.profile} ${config.parameters}`,
           command    = `${path} ${connection} ${mods} ${parameters}`;
 
+    void this.execute(command, is64Bit);
+  }
+
+  private async execute(command: string, is64Bit: boolean): Promise<void> {
+    console.log('execute', command);
+
+    const isAlreadyAdmin = await isAdmin();
+    if (isAlreadyAdmin === true) {
+      console.log('hornet is running with admin rights so don\'t ask for rights');
+      exec(command, <any>{ detached: true, stdio: ['ignore', 'ignore', 'ignore'] });
+      return;
+    }
 
     prompt.exec(command, { name: LaunchService.getName(is64Bit) }, console.log);
   }

@@ -1,6 +1,6 @@
 {
   "name": "hornet2",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT License",
   "main": "main.js",
   "author": "E12 Narf",
@@ -16,6 +16,7 @@
     "child_process": "^1.0.2",
     "core-js": "^2.5.3",
     "gulp-print": "^2.0.1",
+    "is-admin": "^2.1.1",
     "sudo-prompt": "^8.0.0"
   },
   "devDependencies": {

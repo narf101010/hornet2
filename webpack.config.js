@@ -76,6 +76,7 @@ module.exports = {
   "externals": {
     "child_process": "require('child_process')",
     "fs": "require('fs')",
+    "is-admin": "require('is-admin')",
     "sudo-prompt": "require('sudo-prompt')"
   },
   "resolve": {
