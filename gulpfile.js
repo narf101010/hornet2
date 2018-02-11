@@ -21,7 +21,6 @@ gulp.task('_build_electron', () => {
   const filesToCopy = [
     './src/electron/main.js',
     './package.json',
-    './build.json'
   ];
 
   return gulp.src(filesToCopy)

@@ -7,9 +7,9 @@
   "description": "A simple launcher for ArmA 3 for the Echo12 team",
   "scripts": {
     "build": "gulp build",
-    "electron": "npm run build && .\\node_modules\\.bin\\electron build\\",
-    "pack": "electron-builder --config .\\build.json",
-    "deploy": "npm run build && cd build && npm run pack"
+    "mock": "npm run build && .\\node_modules\\.bin\\electron build\\",
+    "pack": "electron-builder --config .\\deploy.json",
+    "deploy": "npm run build && npm run pack"
   },
   "private": true,
   "dependencies": {
