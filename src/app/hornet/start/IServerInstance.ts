@@ -6,4 +6,5 @@ export interface IServerInstance {
   host: string;
   port: number;
   password: string;
+  isRunning: boolean;
 }

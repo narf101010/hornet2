@@ -12,6 +12,7 @@ import { HornetConfigComponent } from './hornet/config/HornetConfig.component';
 import { LaunchService } from './hornet/start/LaunchService';
 import { ConfigService } from './hornet/config/ConfigService';
 import { SettingsComponent } from './general/settings.component';
+import { HornetServerStatusService } from './hornet/start/HornetServerStatusService';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SettingsComponent } from './general/settings.component';
   providers:    [
     ConfigService,
     LaunchService,
+    HornetServerStatusService,
   ],
   bootstrap:    [
     AppComponent,

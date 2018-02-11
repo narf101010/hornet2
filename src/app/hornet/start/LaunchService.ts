@@ -9,6 +9,8 @@ import { IHornetConfig } from '../config/IHornetConfig';
 
 @Injectable()
 export class LaunchService {
+  private running: boolean;
+
   private static getExe(is64Bit: boolean): string {
     return is64Bit === true ? 'arma3_x64.exe' : 'arma3.exe';
   }
@@ -18,9 +20,14 @@ export class LaunchService {
   }
 
   public constructor(private configService: ConfigService) {
+    this.running = false;
   }
 
-  public launch(serverInstance: IServerInstance, is64Bit: boolean): void {
+  public isRunning(): boolean {
+    return this.running;
+  }
+
+  public launch(serverInstance: IServerInstance, is64Bit: boolean, callback: Function): void {
     const config = this.getConfig();
 
     if (config.path === undefined || config.profile === undefined) {
@@ -36,20 +43,30 @@ export class LaunchService {
           parameters = `-name=${config.profile} ${config.parameters}`,
           command    = `${path} ${connection} ${mods} ${parameters}`;
 
-    void this.execute(command, is64Bit);
+    void this.execute(command, is64Bit, callback);
   }
 
-  private async execute(command: string, is64Bit: boolean): Promise<void> {
-    console.log('execute', command);
+  private async execute(command: string, is64Bit: boolean, callback: Function): Promise<void> {
+    this.running = true;
 
     const isAlreadyAdmin = await isAdmin();
+
+    console.log('execute', command);
     if (isAlreadyAdmin === true) {
       console.log('hornet is running with admin rights so don\'t ask for rights');
-      exec(command, <any>{ detached: true, stdio: ['ignore', 'ignore', 'ignore'] });
+      exec(command, <any>{ detached: true, stdio: ['ignore', 'ignore', 'ignore'] }, (error) => {
+        console.log('callback', error);
+        this.running = false;
+        callback();
+      });
       return;
     }
 
-    prompt.exec(command, { name: LaunchService.getName(is64Bit) }, console.log);
+    prompt.exec(command, { name: LaunchService.getName(is64Bit) }, (error) => {
+      console.log('callback', error);
+      this.running = false;
+      callback();
+    });
   }
 
   private getConfig(): IHornetConfig {

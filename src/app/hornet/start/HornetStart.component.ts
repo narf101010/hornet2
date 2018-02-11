@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { IServerList } from './IServerList';
 import { LaunchService } from './LaunchService';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { HornetServerStatusService } from './HornetServerStatusService';
+
 
 @Component({
   selector:    'app-hornet-start',
@@ -13,46 +15,49 @@ export class HornetStartComponent {
   public serverLists: Array<IServerList>;
   public lastUpdate: Date;
 
+  private snackConfig: MatSnackBarConfig;
+  private statusCheckHandle: NodeJS.Timer;
+
   public constructor(private http: HttpClient,
                      private launchService: LaunchService,
+                     private statusService: HornetServerStatusService,
                      public snackBar: MatSnackBar,
                      public viewContainerRef: ViewContainerRef) {
     this.serverLists = [];
     this.lastUpdate  = new Date(0);
 
-    this.getServerLists();
+    this.snackConfig = {
+      viewContainerRef: this.viewContainerRef,
+      duration:         750,
+      panelClass:       'echo-snack-bar',
+    };
+
+    void this.getServerLists();
   }
 
-  public getServerLists(): Promise<Object> {
+  public getServerLists(): Promise<any> {
+    this.stopStatusCheck();
     return this.http.get<Array<IServerList>>('http://stinger.echo12.de/overlay').toPromise()
-               .then((data) => {
+               .then(async (data) => {
                  console.log('load serverList', data);
 
-                 data.forEach((serverList: IServerList) => {
-                   if (serverList.name === 'Internal Instances of Echo12') {
-                     serverList.name = 'Echo12 Server';
-                   } else if (serverList.name === 'External Instances of Echo12') {
-                     serverList.name = 'Externe Server';
-                   }
-                 });
+                 this.fixServerNames(data);
+                 await this.updateStatus(data);
 
                  this.serverLists = data;
                  this.lastUpdate  = new Date();
 
-                 const snackConfig: MatSnackBarConfig = {
-                   viewContainerRef: this.viewContainerRef,
-                   duration:         750,
-                   panelClass:       'echo-snack-bar',
-                 };
-                 this.snackBar.open('Aktualisieren erfolgreich', undefined, snackConfig);
+                 this.showSuccessfulMessage();
 
+                 this.startStatusCheck();
                  return data;
                });
   }
 
+
   public async launch(listIndex: number, instanceIndex: number, is64Bit: boolean): Promise<void> {
-    console.log('### launch', listIndex, instanceIndex, is64Bit);
     await this.getServerLists();
+    console.log('### launch', listIndex, instanceIndex, is64Bit);
 
     if (this.serverLists === undefined
         || this.serverLists[listIndex] === undefined
@@ -62,7 +67,51 @@ export class HornetStartComponent {
       return;
     }
 
+    this.stopStatusCheck();
+
     const serverInstance = this.serverLists[listIndex].instances[instanceIndex];
-    this.launchService.launch(serverInstance, is64Bit);
+    this.launchService.launch(serverInstance, is64Bit, () => {
+      void this.getServerLists();
+    });
+  }
+
+  public isRunning(): boolean {
+    return this.launchService.isRunning();
+  }
+
+  private fixServerNames(serverLists: Array<IServerList>): void {
+    serverLists.forEach((serverList: IServerList) => {
+      if (serverList.name === 'Internal Instances of Echo12') {
+        serverList.name = 'Echo12 Server';
+      } else if (serverList.name === 'External Instances of Echo12') {
+        serverList.name = 'Externe Server';
+      }
+    });
+  }
+
+  private showSuccessfulMessage(): void {
+    this.snackBar.open('Aktualisieren erfolgreich', undefined, this.snackConfig);
+  }
+
+  private stopStatusCheck(): void {
+    clearInterval(this.statusCheckHandle);
+  }
+
+  private startStatusCheck(): void {
+    this.stopStatusCheck();
+
+    if (this.isRunning() === true) {
+      return;
+    }
+
+    this.statusCheckHandle = setInterval(async () => {
+      await this.updateStatus(this.serverLists);
+    }, 15000);
+  }
+
+  private async updateStatus(serverLists: Array<IServerList>): Promise<void> {
+    for (const serverList of serverLists) {
+      void this.statusService.update(serverList);
+    }
   }
 }

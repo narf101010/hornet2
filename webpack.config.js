@@ -77,6 +77,7 @@ module.exports = {
     "child_process": "require('child_process')",
     "fs": "require('fs')",
     "is-admin": "require('is-admin')",
+    "gamedig": "require('gamedig')",
     "sudo-prompt": "require('sudo-prompt')"
   },
   "resolve": {

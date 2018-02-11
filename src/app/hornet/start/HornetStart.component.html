@@ -7,6 +7,7 @@
     <table>
       <thead>
       <tr>
+        <th></th>
         <th>Name</th>
         <th>Host</th>
         <th>Start</th>
@@ -14,6 +15,17 @@
       </thead>
       <tbody>
       <tr *ngFor="let serverInstance of serverList.instances; let instanceIndex=index">
+        <td>
+          <span [hidden]="serverInstance.isRunning !== true">
+            <mat-icon style="color: #7BA628">check_circle</mat-icon>
+          </span>
+          <span [hidden]="serverInstance.isRunning !== undefined">
+            <mat-icon style="color: #3D63B3">panorama_fish_eye</mat-icon>
+          </span>
+          <span [hidden]="serverInstance.isRunning !== false">
+            <mat-icon style="color: #F24E2E">remove_circle</mat-icon>
+          </span>
+        </td>
         <td>{{ serverInstance.name }}</td>
         <td>{{ serverInstance.host }}:{{ serverInstance.port }}</td>
         <td>
