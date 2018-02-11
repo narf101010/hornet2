@@ -14,6 +14,10 @@ mat-sidenav-content {
   margin-left: 237px !important;
 }
 
+mat-slide-toggle {
+  display: block !important;
+}
+
 .mat-form-field {
   display: block !important;
   width: 500px;
