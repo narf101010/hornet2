@@ -6,8 +6,8 @@ import { LaunchService } from './LaunchService';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { HornetServerStatusService } from './HornetServerStatusService';
 
-const REFRESH_INTERVAL = 10000;
-// const REFRESH_INTERVAL = 30000;
+// const REFRESH_INTERVAL = 10000;
+const REFRESH_INTERVAL = 30000;
 
 @Component({
   selector:    'app-hornet-start',
