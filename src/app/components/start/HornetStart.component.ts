@@ -6,7 +6,8 @@ import { LaunchService } from './LaunchService';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { HornetServerStatusService } from './HornetServerStatusService';
 
-const REFRESH_INTERVAL = 15000;
+const REFRESH_INTERVAL = 10000;
+// const REFRESH_INTERVAL = 30000;
 
 @Component({
   selector:    'app-hornet-start',
@@ -111,8 +112,6 @@ export class HornetStartComponent {
   }
 
   private async updateStatus(serverLists: Array<IServerList>): Promise<void> {
-    for (const serverList of serverLists) {
-      void this.statusService.update(serverList);
-    }
+    serverLists.forEach((serverList) => void this.statusService.update(serverList));
   }
 }

@@ -8,24 +8,25 @@ import { query } from 'gamedig';
 
 const { ipcMain } = require('electron');
 
-let mainWinwow, serve;
+let mainWindow: BrowserWindow;
+let serve: boolean;
 const args = process.argv.slice(1);
 serve      = args.some(val => val === '--serve');
 
 function createWindow() {
   // Create the browser window.
-  mainWinwow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width:  1200,
     height: 600,
   });
 
-  if (serve) {
+  if (serve === true) {
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`),
     });
-    mainWinwow.loadURL('http://localhost:4200');
+    mainWindow.loadURL('http://localhost:4200');
   } else {
-    mainWinwow.loadURL(url.format({
+    mainWindow.loadURL(url.format({
       pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
       slashes:  true,
@@ -33,46 +34,37 @@ function createWindow() {
   }
 
   // Emitted when the window is closed.
-  mainWinwow.on('closed', () => {
+  mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store window
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWinwow = null;
+    mainWindow = null;
   });
 
 
   // hide window menu
-  mainWinwow.setMenu(null);
+  mainWindow.setMenu(null);
 
-  mainWinwow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   ipcMain.on('start', (event, arg) => {
     const { command, name } = arg;
 
     const callback = (reason) => {
       console.log('game stopped', reason);
-      event.returnValue = reason;
+      event.sender.send('stop', reason);
     };
     void execute(command, name, callback);
   });
 
   ipcMain.on('isRunning', async (event, arg) => {
     const { host, port } = arg;
+    const isRunning      = await isOnline(host, port);
 
-    event.returnValue = await isOnline(host, port);
+    const channel = `running-${host}-${port}`;
+    event.sender.send(channel, isRunning);
   });
 }
-
-// todo change to
-// ipcMain.on('asynchronous-message', (event, arg) => {
-//   console.log(arg) // prints "ping"
-//   event.sender.send('asynchronous-reply', 'pong')
-// })
-//
-// ipcRenderer.on('asynchronous-reply', (event, arg) => {
-//   console.log(arg) // prints "pong"
-// })
-// ipcRenderer.send('asynchronous-message', 'ping')
 
 async function execute(command: string, name: string, callback: (reason: any) => void): Promise<void> {
   const isAlreadyAdmin = await isAdmin();
@@ -119,6 +111,24 @@ try {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', createWindow);
+
+
+// Quit when all windows are closed.
+  app.on('window-all-closed', function () {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
+
+  app.on('activate', function () {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+      createWindow();
+    }
+  });
 
 } catch (e) {
   // Catch Error

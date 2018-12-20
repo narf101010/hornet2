@@ -42,7 +42,7 @@ export class LaunchService {
   private async execute(command: string, is64Bit: boolean, callback: Function): Promise<void> {
     this.running = true;
 
-    this.electronService.ipcRenderer.once('stop', ()=>{
+    this.electronService.ipcRenderer.once('stop', () => {
       this.running = false;
       callback();
     });

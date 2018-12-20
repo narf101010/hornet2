@@ -1,7 +1,7 @@
 {
   "name": "hornet2",
-  "version": "2.0.0",
-  "description": "A simple launcher for ArmA 3 for the Echo12 team",
+  "version": "1.1.0",
+  "description": "hornet2",
   "homepage": "https://echo12.de",
   "author": "E12 Narf",
   "main": "main.js",
@@ -21,7 +21,7 @@
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
     "electron:local": "npm run build:prod && electron .",
     "electron:windows": "npm run build:prod && electron-builder build --windows",
-    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+    "deploy": "npm run electron:windows"
   },
   "dependencies": {
     "@angular/animations": "^7.1.4",
@@ -73,8 +73,5 @@
     "wait-on": "3.2.0",
     "webdriver-manager": "12.1.0",
     "zone.js": "0.8.26"
-  },
-  "extraResources": [
-    "./**/games.txt"
-  ]
+  }
 }

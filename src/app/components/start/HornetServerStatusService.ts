@@ -19,11 +19,7 @@ export class HornetServerStatusService {
   private isRunning(serverInstance: IServerInstance): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       const channel = `running-${serverInstance.host}-${serverInstance.port}`;
-      console.log({ channel });
-      this.electronService.ipcRenderer.once(channel, (topic, arg) => {
-
-        console.log('running', topic, arg);
-        const { isRunning } = arg;
+      this.electronService.ipcRenderer.once(channel, (event, isRunning) => {
         resolve(isRunning);
       });
 
