@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-e12-palette: (
+  50 : #eff4e5,
+  100 : #d7e4bf,
+  200 : #bdd394,
+  300 : #a3c169,
+  400 : #8fb348,
+  500 : #7ba628,
+  600 : #739e24,
+  700 : #68951e,
+  800 : #5e8b18,
+  900 : #4b7b0f,
+  A100 : #d8ffad,
+  A200 : #bfff7a,
+  A400 : #a7ff47,
+  A700 : #9bff2e,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+$e12-primary: mat-palette($md-e12-palette);
+$e12-accent:  mat-palette($md-e12-palette, A200, A100, A400);
+$e12-warn:    mat-palette($md-e12-palette);
+$e12-theme: mat-light-theme($e12-primary, $e12-accent, $e12-warn);
+
+@include angular-material-theme($e12-theme);

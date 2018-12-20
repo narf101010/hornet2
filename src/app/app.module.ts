@@ -1,18 +1,23 @@
+import 'reflect-metadata';
+import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxFsModule } from 'ngx-fs';
-import { NgxElectronModule } from 'ngx-electron';
+
+
+import { ElectronService } from './providers/electron.service';
 
 import { MaterialModule } from './material.module';
+
 import { AppComponent } from './app.component';
-import { HornetStartComponent } from './hornet/start/HornetStart.component';
-import { HornetConfigComponent } from './hornet/config/HornetConfig.component';
-import { LaunchService } from './hornet/start/LaunchService';
-import { ConfigService } from './hornet/config/ConfigService';
-import { SettingsComponent } from './general/settings.component';
-import { HornetServerStatusService } from './hornet/start/HornetServerStatusService';
+import { ConfigService } from './components/config/ConfigService';
+import { HornetServerStatusService } from './components/start/HornetServerStatusService';
+import { LaunchService } from './components/start/LaunchService';
+import { HornetStartComponent } from './components/start/HornetStart.component';
+import { SettingsComponent } from './components/general/settings.component';
+import { HornetConfigComponent } from './components/config/HornetConfig.component';
 
 @NgModule({
   declarations: [
@@ -24,24 +29,17 @@ import { HornetServerStatusService } from './hornet/start/HornetServerStatusServ
   imports:      [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgxElectronModule,
-    NgxFsModule,
     HttpClientModule,
     MaterialModule,
   ],
-  exports:      [
-    BrowserModule,
-    MaterialModule,
-  ],
+  exports:      [MaterialModule],
   providers:    [
+    ElectronService,
     ConfigService,
     LaunchService,
     HornetServerStatusService,
   ],
-  bootstrap:    [
-    AppComponent,
-  ],
+  bootstrap:    [AppComponent],
 })
 export class AppModule {
 }
